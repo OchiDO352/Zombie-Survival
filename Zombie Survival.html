@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zombie Survival</title>
+    <title>Zombie Survival: Apocalypse Edition v7.1</title>
     <!-- Import Kanit Font (Body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,7 +40,7 @@
             border: 1px solid #451a1a;
             box-shadow: 0 0 50px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(50, 0, 0, 0.2);
             position: relative;
-            border-radius: 24px; /* ROUNDED UPDATE */
+            border-radius: 24px; 
         }
         
         .glass-btn {
@@ -51,7 +51,7 @@
             cursor: pointer;
             text-transform: uppercase;
             letter-spacing: 1px;
-            border-radius: 16px; /* ROUNDED UPDATE */
+            border-radius: 16px;
         }
         .glass-btn:hover {
             background: linear-gradient(to bottom, #451a1a, #2a0a0a);
@@ -59,6 +59,13 @@
             color: #fff;
             transform: translateY(-2px);
             box-shadow: 0 0 15px rgba(220, 38, 38, 0.4);
+        }
+        /* Tab Active State */
+        .glass-btn.active {
+            background: linear-gradient(to bottom, #7f1d1d, #450a0a);
+            border-color: #ef4444;
+            color: white;
+            box-shadow: 0 0 15px rgba(239, 68, 68, 0.3);
         }
 
         #ui-layer {
@@ -87,7 +94,7 @@
             height: 28px;
             background-color: #000;
             border: 2px solid #333;
-            border-radius: 14px; /* ROUNDED UPDATE */
+            border-radius: 14px;
             overflow: hidden;
             margin-top: 8px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.5);
@@ -106,7 +113,7 @@
             );
             transition: width 0.2s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: inset 0 -2px 5px rgba(0,0,0,0.3);
-            border-radius: 14px; /* ROUNDED UPDATE */
+            border-radius: 14px;
         }
         #shield-bar {
             position: absolute;
@@ -128,7 +135,7 @@
             background-color: #111;
             margin: 0 auto;
             border: 1px solid #333;
-            border-radius: 99px; /* ROUNDED UPDATE */
+            border-radius: 99px;
             overflow: hidden;
             margin-top: 10px;
             pointer-events: auto;
@@ -147,12 +154,12 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            padding: 2.5rem;
-            border-radius: 32px; /* ROUNDED UPDATE */
+            padding: 2rem;
+            border-radius: 32px;
             text-align: center;
             pointer-events: auto;
-            max-width: 95%;
-            width: 900px;
+            width: 95%; 
+            max-width: 600px;
             color: #d1d5db;
             z-index: 100;
             border: 1px solid #552222;
@@ -169,7 +176,7 @@
             cursor: pointer;
             position: relative;
             overflow: hidden;
-            border-radius: 20px; /* ROUNDED UPDATE */
+            border-radius: 20px;
         }
         .action-btn::after {
             content: '';
@@ -194,7 +201,7 @@
             border: 1px solid #333;
             background: rgba(10, 10, 10, 0.8);
             cursor: pointer;
-            border-radius: 24px; /* ROUNDED UPDATE */
+            border-radius: 24px;
         }
         .skin-option:hover {
             transform: translateY(-5px);
@@ -212,7 +219,7 @@
             border: 1px solid #333;
             background: #000;
             cursor: pointer;
-            border-radius: 12px; /* ROUNDED UPDATE */
+            border-radius: 12px;
         }
         .diff-option:hover {
             background: #222;
@@ -227,7 +234,7 @@
             cursor: pointer;
             transition: all 0.2s;
             border: 1px solid #444;
-            border-radius: 16px; /* ROUNDED UPDATE */
+            border-radius: 16px;
         }
         .upgrade-card:hover {
             transform: scale(1.03);
@@ -243,7 +250,7 @@
             -webkit-appearance: none;
             height: 18px;
             width: 18px;
-            border-radius: 50%; /* ROUNDED UPDATE: Circle thumb */
+            border-radius: 50%;
             background: #ef4444;
             cursor: pointer;
             margin-top: -7px;
@@ -261,7 +268,7 @@
         .volume-control {
             background: rgba(0,0,0,0.6);
             padding: 15px 25px;
-            border-radius: 16px; /* ROUNDED UPDATE */
+            border-radius: 16px;
             border: 1px solid #333;
         }
 
@@ -404,7 +411,14 @@
         <div id="settingsContent" class="hidden">
             <h2 class="text-3xl font-bold text-white mb-8 tracking-widest border-b border-gray-800 pb-4" id="settingsTitle">CONFIG</h2>
             
-            <div class="grid gap-6 max-w-md mx-auto">
+            <!-- NEW: TABS SYSTEM -->
+            <div class="flex gap-2 justify-center mb-8">
+                <button id="tabSystemBtn" onclick="switchSettingsTab('system')" class="glass-btn px-6 py-2 text-sm font-bold active w-1/2 rounded-xl transition-colors">SYSTEM</button>
+                <button id="tabControlsBtn" onclick="switchSettingsTab('controls')" class="glass-btn px-6 py-2 text-sm font-bold w-1/2 rounded-xl transition-colors">CONTROLS</button>
+            </div>
+
+            <!-- TAB 1: SYSTEM -->
+            <div id="tabSystem" class="grid gap-6 max-w-md mx-auto">
                 <div class="flex items-center justify-between bg-black/50 p-4 border border-gray-800 rounded-xl">
                     <span class="text-gray-400 font-bold uppercase text-xs tracking-wide" id="settingLang">Language</span>
                     <button class="glass-btn px-6 py-2 text-xs font-bold text-yellow-500 border-yellow-900/30 rounded-lg" onclick="toggleLanguage()" onmouseenter="sfx.hover()" id="settingLangBtn">EN / TH</button>
@@ -422,11 +436,37 @@
                     <div class="flex justify-between text-xs text-gray-500 mb-2 font-bold tracking-wide uppercase"><span>SFX Level</span> <span id="sfxValMain" class="text-white">20%</span></div>
                     <input type="range" min="0" max="100" value="20" class="w-full" id="sfxSliderMain" oninput="setVolume('sfx', this.value)" onmouseenter="sfx.hover()">
                 </div>
-
-                <button onclick="hideSettings()" onmouseenter="sfx.hover()" class="mt-4 glass-btn w-full py-3 font-bold text-gray-500 hover:text-white uppercase tracking-widest rounded-xl">
-                    <span id="btnBackText">BACK</span>
-                </button>
             </div>
+
+            <!-- TAB 2: CONTROLS -->
+            <div id="tabControls" class="hidden">
+                 <div class="grid grid-cols-2 gap-4 text-xs text-gray-300 font-bold max-w-md mx-auto">
+                    <div class="bg-gray-900/50 p-4 rounded-xl border border-gray-800 flex flex-col items-center gap-2">
+                        <span class="bg-gray-800 text-white px-3 py-1 rounded border border-gray-600 text-sm">W A S D</span>
+                        <span class="text-gray-500 uppercase tracking-wider text-[10px]">Movement</span>
+                    </div>
+                    <div class="bg-gray-900/50 p-4 rounded-xl border border-gray-800 flex flex-col items-center gap-2">
+                        <span class="bg-gray-800 text-white px-3 py-1 rounded border border-gray-600 text-sm">SHIFT</span>
+                        <span class="text-gray-500 uppercase tracking-wider text-[10px]">Dash / Dodge</span>
+                    </div>
+                    <div class="bg-gray-900/50 p-4 rounded-xl border border-gray-800 flex flex-col items-center gap-2">
+                        <span class="bg-gray-800 text-white px-3 py-1 rounded border border-gray-600 text-sm">MOUSE</span>
+                        <span class="text-gray-500 uppercase tracking-wider text-[10px]">Aim Cursor</span>
+                    </div>
+                    <div class="bg-gray-900/50 p-4 rounded-xl border border-gray-800 flex flex-col items-center gap-2">
+                        <span class="bg-gray-800 text-white px-3 py-1 rounded border border-gray-600 text-sm">L-CLICK</span>
+                        <span class="text-gray-500 uppercase tracking-wider text-[10px]">Fire Weapon</span>
+                    </div>
+                    <div class="bg-gray-900/50 p-4 rounded-xl border border-gray-800 flex flex-col items-center gap-2 col-span-2">
+                        <span class="bg-gray-800 text-white px-3 py-1 rounded border border-gray-600 text-sm">R-CLICK</span>
+                        <span class="text-gray-500 uppercase tracking-wider text-[10px]">Ultimate Ability</span>
+                    </div>
+                </div>
+            </div>
+
+            <button onclick="hideSettings()" onmouseenter="sfx.hover()" class="mt-8 glass-btn w-full py-3 font-bold text-gray-500 hover:text-white uppercase tracking-widest rounded-xl">
+                <span id="btnBackText">BACK</span>
+            </button>
         </div>
 
         <div id="gameOverButtons" class="hidden grid gap-3 mt-6">
@@ -441,12 +481,6 @@
             </button>
         </div>
         
-        <div id="controlsHint" class="mt-8 text-[10px] text-gray-600 flex justify-center gap-6 uppercase tracking-widest font-bold">
-            <span class="flex items-center gap-1"><span class="bg-gray-900 text-gray-300 px-1.5 border border-gray-700 rounded">WASD</span> Move</span> 
-            <span class="flex items-center gap-1"><span class="bg-gray-900 text-gray-300 px-1.5 border border-gray-700 rounded">SHIFT</span> Dash</span>
-            <span class="flex items-center gap-1"><span class="bg-gray-900 text-gray-300 px-1.5 border border-gray-700 rounded">L-CLICK</span> Fire</span> 
-            <span class="flex items-center gap-1"><span class="bg-gray-900 text-gray-300 px-1.5 border border-gray-700 rounded">R-CLICK</span> Ult</span> 
-        </div>
     </div>
 
     <canvas id="gameCanvas"></canvas>
@@ -481,9 +515,14 @@
     
     const mainMenuContent = document.querySelector('#mainMenuContent');
     const settingsContent = document.querySelector('#settingsContent');
-    const controlsHint = document.querySelector('#controlsHint');
     const settingSoundBtn = document.querySelector('#settingSoundBtn');
     const settingLangBtn = document.querySelector('#settingLangBtn');
+
+    // Tab Elements
+    const tabSystemBtn = document.getElementById('tabSystemBtn');
+    const tabControlsBtn = document.getElementById('tabControlsBtn');
+    const tabSystem = document.getElementById('tabSystem');
+    const tabControls = document.getElementById('tabControls');
 
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -964,13 +1003,14 @@
     }
 
     // --- BUG FIX: Settings State Tracking ---
-    let settingsOrigin = 'menu'; // 'menu', 'gameover', 'pause'
+    let settingsOrigin = 'menu'; 
 
     window.showSettings = function() {
         settingsOrigin = 'menu';
         mainMenuContent.classList.add('hidden');
         settingsContent.classList.remove('hidden');
-        controlsHint.classList.add('hidden');
+        switchSettingsTab('system'); // Default to system tab
+        // controlsHint is now removed/handled within settings
     }
     
     window.showSettingsFromGameOver = function() {
@@ -978,6 +1018,22 @@
         statsDisplay.classList.add('hidden');
         gameOverButtons.classList.add('hidden');
         settingsContent.classList.remove('hidden');
+        switchSettingsTab('system');
+    }
+    
+    // NEW: Tab Switching Logic
+    window.switchSettingsTab = function(tabName) {
+        if(tabName === 'system') {
+            tabSystem.classList.remove('hidden');
+            tabControls.classList.add('hidden');
+            tabSystemBtn.classList.add('active');
+            tabControlsBtn.classList.remove('active');
+        } else {
+            tabSystem.classList.add('hidden');
+            tabControls.classList.remove('hidden');
+            tabSystemBtn.classList.remove('active');
+            tabControlsBtn.classList.add('active');
+        }
     }
 
     // NEW FUNCTION: Completely Reset Main Menu
@@ -991,7 +1047,6 @@
         modal.style.display = 'block';
         mainMenuContent.classList.remove('hidden');
         menuButtons.classList.remove('hidden'); 
-        controlsHint.classList.remove('hidden');
         skinSelector.classList.remove('hidden');
 
         // FIX: Reset Title Text
@@ -1011,7 +1066,6 @@
             // Default back to main menu
             mainMenuContent.classList.remove('hidden');
             menuButtons.classList.remove('hidden');
-            controlsHint.classList.remove('hidden');
         }
     }
 
@@ -1207,10 +1261,6 @@
                              createExplosion(this.x, this.y, '#ccc', 3);
                              return; // Bounce logic done
                         }
-                        // Other ults (Soldier/Hazard) pass through or explode
-                        if(selectedSkinKey === 'standard') { // Soldier bullets destroy on walls or pierce? Let's pierce.
-                             // Do nothing, let it pass
-                        }
                         if(Math.random() > 0.5) createExplosion(this.x, this.y, this.color, 1);
                         continue;
                     }
@@ -1265,8 +1315,9 @@
             if(this.type === 'elite' || this.type === 'titan') { ctx.shadowBlur = 10; ctx.shadowColor = this.color; ctx.strokeStyle = 'white'; ctx.lineWidth = 2; ctx.stroke(); ctx.shadowBlur = 0; }
             ctx.fillStyle = this.canShoot ? '#0ff' : '#f00'; ctx.shadowBlur = 5; ctx.shadowColor = ctx.fillStyle; ctx.beginPath(); ctx.arc(this.radius/2, -this.radius/3, this.radius/6, 0, Math.PI*2); ctx.fill(); ctx.beginPath(); ctx.arc(this.radius/2, this.radius/3, this.radius/6, 0, Math.PI*2); ctx.fill(); ctx.shadowBlur = 0;
             if (this.type === 'dasher' && this.isDashing) { ctx.strokeStyle = 'yellow'; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(-20, 0); ctx.lineTo(-50, 0); ctx.stroke(); }
-            // HP Bars
-            if (['tank','elite','titan'].includes(this.type)) { 
+            
+            // HP Bars - Only show when game is active
+            if (gameActive && ['tank','elite','titan'].includes(this.type)) { 
                 ctx.rotate(-angle); ctx.fillStyle = 'red'; 
                 const diff = difficultySettings[currentDifficulty];
                 const maxHp = (this.type==='titan' ? 5000 : (this.type==='elite'?(200+(currentLevel*25)):(100+(currentLevel*20)))) * diff.hpMult; 
@@ -1581,7 +1632,7 @@
     function initMenuAnimation() { if (menuAnimationId) cancelAnimationFrame(menuAnimationId); menuEnemies = []; for (let i = 0; i < 8; i++) spawnMenuEnemy(); animateMenu(); }
     function spawnMenuEnemy() {
         const y = Math.random() * canvas.height;
-        const types = ['normal', 'runner', 'tank', 'boomer', 'specter', 'shooter', 'sniper', 'scatter', 'dasher', 'elite'];
+        const types = ['normal', 'runner', 'tank', 'boomer', 'specter', 'shooter', 'sniper', 'scatter', 'dasher', 'elite', 'titan'];
         const enemy = new Enemy(-50, y, types[Math.floor(Math.random() * types.length)]);
         enemy.velocity.x = Math.random() * 2 + 1; enemy.velocity.y = (Math.random() - 0.5) * 0.5;
         menuEnemies.push(enemy);
